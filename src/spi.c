@@ -18,17 +18,22 @@ unsigned int act_shift;
 unsigned int int_counter = 0;
 spi_hw_t *mySpiHW;
 
+unsigned int incFlag;
+
 void on_spi_out_ready()
 {
     gpio_put(FLAG_GPIO, true);
-    //int r = 0;
     int_counter++;
+
+    if (incFlag)
+        act_shift++;
+
     int p = crc_polynom;
     int s = act_shift;
 
-    for(int i = 0; i < 16; i++)
+    for (int i = 0; i < 16; i++)
     {
-        if(s & 0x8000)
+        if (s & 0x8000)
         {
             s = (s << 1) ^ crc_polynom;
             //r = (r << 1) + 1;
@@ -90,4 +95,9 @@ void crcnoise_set_polynom(int p)
 {
     //crc_polynom = p;
     crc_polynom = p & 0x7FFF;
+}
+
+void crcnoise_toggle_increment(void)
+{
+    incFlag = !incFlag;
 }

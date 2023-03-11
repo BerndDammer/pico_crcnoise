@@ -19,6 +19,7 @@ void menu(void)
     printf("2 set crc polynom 0X8005\n");
     printf("3 set crc polynom 0X8007\n");
     printf("8 set crc polynom 0X0000\n");
+    printf("i toggle increment\n");
     printf("r randomizing shift\n");
     printf("0 shift\n");
     printf("press key to select\n");
@@ -70,7 +71,8 @@ void loop(void)
             case 'r':
                 crcnoise_set_shift(rand());
                 break;
-            case 's':
+            case 'i':
+                crcnoise_toggle_increment();
                 break;
             case ' ':
             case '0':

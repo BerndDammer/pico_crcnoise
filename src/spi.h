@@ -11,6 +11,7 @@
 void crcnoise_init(void);
 void crcnoise_set_shift(int shift);
 void crcnoise_set_polynom(int p);
+void crcnoise_toggle_increment(void);
 
 
 #endif /* SPI_H_ */
